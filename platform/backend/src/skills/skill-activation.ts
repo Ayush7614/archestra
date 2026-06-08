@@ -3,6 +3,7 @@ import {
   type UserSystemPromptContext,
 } from "@archestra/shared";
 import { TeamModel, UserModel } from "@/models";
+import { SKILL_SANDBOX_ATTACHMENTS_DIR } from "@/skills-sandbox/runtime-image";
 import { renderSystemPrompt } from "@/templating";
 import type { Skill, SkillFile } from "@/types";
 
@@ -49,21 +50,25 @@ export function formatSkillActivation({
     skill.templated && promptContext
       ? (renderSystemPrompt(skill.content, promptContext) ?? skill.content)
       : skill.content;
+  const skillRoot = `/skills/${escapeXmlText(skill.name)}`;
   const sandboxHint = canRunSandbox
-    ? " This skill is now mounted in your sandbox under /skills/" +
-      `${escapeXmlText(skill.name)}. To execute a script or shell command from ` +
-      "it, call run_command (its modules are importable). Python is the uv " +
-      "project venv at /home/sandbox — install packages with " +
-      "`uv add --project /home/sandbox <pkg>`. Files the user attached are under " +
-      "/home/sandbox/attachments/. Use download_file to retrieve generated " +
-      "files, upload_file to add inputs."
+    ? ` This skill is mounted in your sandbox at ${skillRoot} and is on ` +
+      "PYTHONPATH, so its modules import directly in run_command (no path " +
+      `setup of any kind). Run a bundled script via run_command (\`python3 ${skillRoot}` +
+      `/<script>\`); pass cwd: ${skillRoot} when a script reads bundled files ` +
+      "by relative path. Python is the uv project venv at /home/sandbox " +
+      "(`python3`) — install packages with `uv add --project /home/sandbox " +
+      `<pkg>\`. Files the user attached are under ${SKILL_SANDBOX_ATTACHMENTS_DIR}/. ` +
+      "Use download_file to retrieve generated files, upload_file to add inputs."
     : "";
   const resources =
     files.length > 0
       ? `\n<skill_resources>\n${files
           .map((file) => `${escapeXmlText(file.path)} (${file.kind})`)
           .join("\n")}\n</skill_resources>\n` +
-        "Inspect any resource with read_skill_file." +
+        "Inspect any resource with read_skill_file before re-implementing — " +
+        "prefer importing and running the skill's own modules over rewriting " +
+        "them." +
         sandboxHint
       : "";
 
