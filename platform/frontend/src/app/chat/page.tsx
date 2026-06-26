@@ -1868,6 +1868,7 @@ export function ChatPageContent({
                 {activeRightTab === "files" && (
                   <div className="flex-1 min-h-0 overflow-auto">
                     <ConversationFilesPanel
+                      key={conversationId ?? "none"}
                       conversationId={conversationId}
                       artifact={conversation?.artifact}
                       projectId={conversation?.projectId}
