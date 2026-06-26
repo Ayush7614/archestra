@@ -46017,6 +46017,7 @@ export type GetMcpServersResponses = {
         localInstallationStatus: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError: string | null;
         oauthRefreshError: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage: string | null;
         oauthRefreshFailedAt: string | null;
         createdAt: string;
         updatedAt: string;
@@ -46054,6 +46055,7 @@ export type InstallMcpServerData = {
         localInstallationStatus?: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError?: string | null;
         oauthRefreshError?: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage?: string | null;
         oauthRefreshFailedAt?: unknown;
         userId?: string;
         userConfigValues?: {
@@ -46154,6 +46156,7 @@ export type InstallMcpServerResponses = {
         localInstallationStatus: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError: string | null;
         oauthRefreshError: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage: string | null;
         oauthRefreshFailedAt: string | null;
         createdAt: string;
         updatedAt: string;
@@ -46355,6 +46358,7 @@ export type GetMcpServerResponses = {
         localInstallationStatus: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError: string | null;
         oauthRefreshError: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage: string | null;
         oauthRefreshFailedAt: string | null;
         createdAt: string;
         updatedAt: string;
@@ -46481,6 +46485,7 @@ export type ReauthenticateMcpServerResponses = {
         localInstallationStatus: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError: string | null;
         oauthRefreshError: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage: string | null;
         oauthRefreshFailedAt: string | null;
         createdAt: string;
         updatedAt: string;
@@ -46879,6 +46884,7 @@ export type ReinstallMcpServerResponses = {
         localInstallationStatus: 'idle' | 'pending' | 'discovering-tools' | 'success' | 'error';
         localInstallationError: string | null;
         oauthRefreshError: 'refresh_failed' | 'no_refresh_token';
+        oauthRefreshErrorMessage: string | null;
         oauthRefreshFailedAt: string | null;
         createdAt: string;
         updatedAt: string;
